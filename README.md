@@ -1,5 +1,5 @@
 # 100 Days Of Code - Python Bootcamp 2023
 
-100 days of code
+Summary
 
-- [Day 1](./day_001/main.py) - Working with variables to manage data
+- [Days 1 to 10](./days_001_010/days_001_010.md)
