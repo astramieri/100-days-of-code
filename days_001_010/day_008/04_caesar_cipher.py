@@ -1,4 +1,5 @@
 # Caesar Cipher
+
 while True:
     action = input("Type 'encode' to encrypt, 'decode' to decrypt, or 'exit' to quit: ")
 
