@@ -13,8 +13,8 @@ while True:
         if action == 'decode':
              shift = shift * -1 
 
-        base = 26
-        offset = 96 # a=97
+        base = 26 # characters in alphabet
+        offset = 96 # a=97 ASCII table
 
         for i in range(0, len(input_text)):
             position = ord(input_text[i]) - offset # a=1, b=2, .. z=26
