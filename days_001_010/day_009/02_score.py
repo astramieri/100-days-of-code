@@ -6,20 +6,19 @@ student_scores = {
     "Neville" : 62
 }
 
-student_grades = {
-    91 : "Outstanding",
-    81 : "Exceeds Expectations",
-    71 : "Acceptable",
-    00 : "Fail"
-}
+student_grades = {}
 
 for key in student_scores:
     score = student_scores[key]
 
-    for grade in student_grades:
-        if score >= grade:
-            student_scores[key] = student_grades[grade]
-            break
+    if score > 90:
+       student_grades[key] = "Outstanding"
+    elif score > 80:
+        student_grades[key] = "Exceeds Expectations"
+    elif score > 70:
+        student_grades[key] = "Acceptable"
+    else:
+        student_grades[key] = "Fail"
 
-print(student_scores)
+print(student_grades)
     
