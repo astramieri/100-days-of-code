@@ -1,6 +1,9 @@
-def lenght(string):
+def length(string):
     """Return the number of chars in a string.
     This string can be multi-line."""
+    def inner_length(inner_string):
+        pass
+
     return len(string)
 
 """
@@ -13,6 +16,6 @@ comment
 # DO THIS INSTEAD
 # FROR MULTI-LINE
 # COMMENTS
-length = lenght("Docstring")
+length = length("Docstring")
 
 print("The length = " + str(length))
