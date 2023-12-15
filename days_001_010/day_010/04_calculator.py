@@ -1,4 +1,5 @@
-
+import os
+from art import logo
 
 # Calculator
 def add(n1, n2):
@@ -21,29 +22,28 @@ operations = {
     "/": divide 
 }
 
-# e.g.
-num1 = int(input("What's the first number? "))
-num2 = int(input("What's the second number? "))
+def calculator():
+    print(logo)
 
-operation = input("Which operation do you want to do ('+', '-', '*', '/')? ")
+    num1 = float(input("What's the first number? "))    
+    
+    while True:
+        operation = input("Which operation do you want to do ('+', '-', '*', '/')? ")
 
-function = operations[operation]
-result = function(num1, num2)
+        num2 = float(input("What's the next number? "))
 
-print(f"{num1} {operation} {num2} = {result}")
+        result = operations[operation](num1, num2)
 
-while True:
-    want_continue = input("Do you want continue ('y'=yes, 'n'=no)? ")
+        print(f"{num1} {operation} {num2} = {result}")
 
-    if want_continue == 'n':
-        break
+        num1 = result
 
-    operation = input("Pick another operation ('+', '-', '*', '/')? ")
-    num3 = int(input("What's the next number? "))
+        next_action = input("Do you want continue ('y'=yes, 'r'=reset, 'n'=exit)? ")
 
-    function = operations[operation]
-    previous = result
+        if next_action == 'n':
+            break
+        elif next_action == 'r':
+            os.system('cls')
+            calculator()
 
-    result = function(previous, num3)
-
-    print(f"{previous} {operation} {num3} = {result}")
+calculator()
