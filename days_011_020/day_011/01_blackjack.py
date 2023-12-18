@@ -13,65 +13,59 @@ def new_card():
     card = random.choice(cards)
     return card
 
-your_cards = []
-computer_cards = []
-
-for i in range(2):
-    your_cards.append(new_card())
-    computer_cards.append(new_card())
-
-def get_score(cards):
+def calculate_score(cards):
+    """Returns the score calculated from the cards."""
     score = 0
 
     for card in cards:
         if card == 'A':
-            score += 10
+            score += 11
         elif card in ['J', 'Q', 'K']:
             score += 10
         else:
             score += int(card)
 
         if score > 21:
-            pass # TOFIX
+            if card == 'A':
+                score -= 10
 
+    if score == 21:
+        if len(cards) == 2:
+            score = 0 # blackjack
 
     return score
 
-while True:
+def play_game():
     print(logo)
 
-    play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
+    user_cards = []
+    computer_cards = []
 
-    if play == 'n':
-        break
+    for i in range(2):
+        user_cards.append(new_card())
+        computer_cards.append(new_card())
 
+    
 
-    your_cards.append(new_random_card())
-    your_cards.append(new_random_card())
+want_to_play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
+    
+while want_to_play == 'y':
+    play_game()
 
-    print(f"Your cards: {your_cards}")
+# if play == 'y':
+#     is_game_over = False
 
+#     while not is_game_over:
+#         user_score = calculate_score(user_cards)
+#         computer_score = calculate_score(computer_cards)
 
-    computer_cards.append(new_random_card())
-    computer_cards.append(new_random_card())
+#         print(f"Your cards: {user_cards}, current score: {user_score}")
+#         print(f"Computer first card: {computer_cards[0]}")
 
-    print(f"Computer first card: {computer_cards[0]}")
+#         if user_score == 0 or computer_score == 0 or user_score > 21:
+#             is_game_over = True
+#         else:
+#             more_cards = input("Do you want another card? Type 'y' or 'n' to pass: ")
 
-    while True:
-        more_cards = input("Do you want another card? Type 'y' or 'n' to pass: ")
-
-        if more_cards == 'n':
-            break
-
-        your_cards.append(new_random_card())
-
-        print(f"Your cards: {your_cards}")
-
-        your_score = get_score(your_cards)
-
-        if your_score > 21:
-            print("You lose")
-            break # TOFIX
-            
-
-    break
+#             if more_cards == 'y':
+#                 user_cards.append(new_card())
