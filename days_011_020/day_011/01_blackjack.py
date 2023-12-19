@@ -18,6 +18,9 @@ def calculate_score(cards):
     score = 0
 
     for card in cards:
+        if card == '?':
+            card = new_card()
+
         if card == 'A':
             score += 11
         elif card in ['J', 'Q', 'K']:
@@ -35,21 +38,59 @@ def calculate_score(cards):
 
     return score
 
+def compare_score(user_score, computer_score):
+    if user_score == computer_score:
+        return "Draw 🙃"
+    elif computer_score == 0:
+        return "Computer has Blackjack. You lose. 😱"
+    elif user_score == 0:
+        return "You have a Blackjack. You win. 😎"
+    elif user_score > 21:
+        return "You went over. You lose. 😭"
+    elif computer_score > 21:
+        return "Computer went over. You win. 😬"
+    elif user_score > computer_score:
+        return "You win. 🙂"
+    else:
+        return "You lose. 😤"
+
 def play_game():
     print(logo)
 
     user_cards = []
     computer_cards = []
 
-    for i in range(2):
-        user_cards.append(new_card())
-        computer_cards.append(new_card())
+    user_cards.append(new_card())
+    user_cards.append(new_card())
 
-    
+    computer_cards.append(new_card())
+    computer_cards.append('?')
 
-want_to_play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
-    
-while want_to_play == 'y':
+    print(f"Computer cards: {computer_cards}")  
+    print(f"Your cards: {user_cards}, your score: {calculate_score(user_cards)}")
+      
+    is_game_over = False
+    while not is_game_over:
+        more_cards = input("Do you want another card? Type 'y' or 'n' to pass: ")
+
+        if more_cards == 'y':
+            user_cards.append(new_card())
+        else:
+            is_game_over = True
+        
+        user_score = calculate_score(user_cards)
+
+        print(f"Your cards: {user_cards}, your score: {user_score}")
+
+        if user_score > 21:
+            is_game_over = True
+
+    computer_score = calculate_score(computer_cards)
+
+    print(f"Final score: you ({user_score}), computer ({computer_score})")
+    print(compare_score(user_score, computer_score))
+
+while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == 'y':
     play_game()
 
 # if play == 'y':
