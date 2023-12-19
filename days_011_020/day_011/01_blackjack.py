@@ -18,9 +18,6 @@ def calculate_score(cards):
     score = 0
 
     for card in cards:
-        if card == '?':
-            card = new_card()
-
         if card == 'A':
             score += 11
         elif card in ['J', 'Q', 'K']:
@@ -64,11 +61,15 @@ def play_game():
     user_cards.append(new_card())
 
     computer_cards.append(new_card())
-    computer_cards.append('?')
+    computer_cards.append(new_card())
 
-    print(f"Computer cards: {computer_cards}")  
+    computer_cards_2 = computer_cards.copy()
+    computer_cards_2[0] = '?'
+
+    print(f"Computer cards: {computer_cards_2}")
     print(f"Your cards: {user_cards}, your score: {calculate_score(user_cards)}")
       
+    # user turn
     is_game_over = False
     while not is_game_over:
         more_cards = input("Do you want another card? Type 'y' or 'n' to pass: ")
@@ -85,28 +86,21 @@ def play_game():
         if user_score > 21:
             is_game_over = True
 
-    computer_score = calculate_score(computer_cards)
+    # computer turn
+    is_game_over = False
+    while not is_game_over:
+        computer_score = calculate_score(computer_cards)
 
-    print(f"Final score: you ({user_score}), computer ({computer_score})")
-    print(compare_score(user_score, computer_score))
+        if computer_score == 0:
+            is_game_over = True
+        if computer_score < 17:
+            computer_cards.append(new_card())
+        else:
+            is_game_over = True
+
+    print(f"Computer cards: {computer_cards}, computer score: {computer_score}")
+
+    print(compare_score(user_score, computer_score) + "\n")
 
 while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == 'y':
     play_game()
-
-# if play == 'y':
-#     is_game_over = False
-
-#     while not is_game_over:
-#         user_score = calculate_score(user_cards)
-#         computer_score = calculate_score(computer_cards)
-
-#         print(f"Your cards: {user_cards}, current score: {user_score}")
-#         print(f"Computer first card: {computer_cards[0]}")
-
-#         if user_score == 0 or computer_score == 0 or user_score > 21:
-#             is_game_over = True
-#         else:
-#             more_cards = input("Do you want another card? Type 'y' or 'n' to pass: ")
-
-#             if more_cards == 'y':
-#                 user_cards.append(new_card())
