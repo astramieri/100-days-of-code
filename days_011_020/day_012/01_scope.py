@@ -22,5 +22,10 @@ def game():
     drink_potion()
 
 game()
-# print(potion_strength)
+# print(potion_strength) # this raises a NameErro
 
+
+if True:
+    my_variable = 2
+
+print(my_variable) # there is no block scope!
