@@ -2,11 +2,11 @@
 
 import random
 
-secret_number = random.randint(1, 100)
+answer = random.randint(1, 100)
 
 attempts = 0
 
-is_game_over = False
+is_game_over = False  
 
 def make_a_guess():
     global attempts
@@ -16,13 +16,13 @@ def make_a_guess():
 
     guess = int(input("Make a guess: "))
 
-    if guess == secret_number:
+    if guess == answer:
         print(f"You win! 😎")
         is_game_over = True
-    elif guess < secret_number:
+    elif guess < answer:
         print(f"Too low! 😤")
         attempts -= 1
-    elif guess > secret_number:
+    elif guess > answer:
         print(f"Too high! 😤")
         attempts -= 1
 
