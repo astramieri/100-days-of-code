@@ -19,7 +19,7 @@ def has_more_followers(couple):
 
 def print_challenge(couple):
     def format_entry(entry):
-        return f"{entry['name']}, a {entry['description']}, from {entry['country']}, {entry['follower_count']}M followers."
+        return f"{entry['name']}, a {entry['description']}, from {entry['country']}."
 
     print(f"Compare A: {format_entry(couple['A'])}")
     print(art.vs)
