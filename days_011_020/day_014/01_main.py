@@ -1,17 +1,15 @@
 import art
 import data
 import random
+import os
 
-score = 0
-
-print(art.logo)
+def print_logo():
+    os.system("cls")
+    print(art.logo)
 
 def get_random_entry():
     index = random.randint(0, len(data.list) - 1)
     return data.list.pop(index)
-
-def print_entry(entry, text):
-    print(f"{text} A: {entry['name']}, a {entry['description']}, from {entry['country']}.")
 
 def has_more_followers(couple):
     if couple['A']['follower_count'] > couple['B']['follower_count']:
@@ -19,24 +17,46 @@ def has_more_followers(couple):
     else:
         return 'B'
 
-couple = {}
+def print_challenge(couple):
+    def format_entry(entry):
+        return f"{entry['name']}, a {entry['description']}, from {entry['country']}, {entry['follower_count']}M followers."
 
-couple['A'] = get_random_entry()
-couple['B'] = get_random_entry()
+    print(f"Compare A: {format_entry(couple['A'])}")
+    print(art.vs)
+    print(f"Against B: {format_entry(couple['B'])}")
+    
+def play_game():
+    print_logo()
 
-print(has_more_followers(couple))
+    is_game_over = False
 
-print_entry(couple['A'], "Compare A")
-print(art.vs)
-print_entry(couple['B'], "Against B")
+    score = 0
 
-choice = input("Who has more followers? Type 'A' or 'B': ")
+    couple = {}
+    
+    couple["A"] = get_random_entry()
+    couple["B"] = get_random_entry()
 
-if choice == has_more_followers(couple):
-    score += 1
-    choice['A'] == couple[choice]
-    couple['B'] = get_random_entry()
-    print(f"You're right! Current score: {score}.")
-else:
-    print(f"Sorry that's wrong! Final score: {score}.")
+    while not is_game_over:
+        print_challenge(couple)
 
+        choice = input("Who has more followers? Type 'A' or 'B': ")
+
+        print_logo()
+
+        if choice == has_more_followers(couple):
+            score += 1
+
+            if len(data.list) != 0:
+                print(f"You're right! Current score: {score}.")
+
+                couple["A"] = couple[choice]
+                couple["B"] = get_random_entry()
+            else:
+                print(f"You win! Final score: {score}.")
+                is_game_over = True
+        else:
+            print(f"Sorry that's wrong! Final score: {score}.")
+            is_game_over = True
+
+play_game()
