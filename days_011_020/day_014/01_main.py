@@ -17,14 +17,9 @@ def has_more_followers(couple):
     else:
         return 'B'
 
-def print_challenge(couple):
-    def format_entry(entry):
-        return f"{entry['name']}, a {entry['description']}, from {entry['country']}."
+def format_entry(entry):
+    return f"{entry['name']}, a {entry['description']}, from {entry['country']}."
 
-    print(f"Compare A: {format_entry(couple['A'])}")
-    print(art.vs)
-    print(f"Against B: {format_entry(couple['B'])}")
-    
 def play_game():
     print_logo()
 
@@ -38,7 +33,9 @@ def play_game():
     couple["B"] = get_random_entry()
 
     while not is_game_over:
-        print_challenge(couple)
+        print(f"Compare A: {format_entry(couple['A'])}")
+        print(art.vs)
+        print(f"Against B: {format_entry(couple['B'])}")
 
         choice = input("Who has more followers? Type 'A' or 'B': ")
 
