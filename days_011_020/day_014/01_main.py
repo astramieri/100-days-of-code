@@ -56,7 +56,7 @@ def play_game():
                 print(f"You win! Final score: {score}.")
                 is_game_over = True
         else:
-            print(f"Sorry that's wrong! Final score: {score}.")
+            print(f"Sorry, that's wrong! Final score: {score}.")
             is_game_over = True
 
 play_game()
