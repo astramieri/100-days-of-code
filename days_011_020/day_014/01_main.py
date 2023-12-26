@@ -3,13 +3,16 @@ import data
 import random
 import os
 
+
 def print_logo():
     os.system("cls")
     print(art.logo)
 
+
 def get_random_entry():
     index = random.randint(0, len(data.list) - 1)
     return data.list.pop(index)
+
 
 def has_more_followers(couple):
     if couple['A']['follower_count'] > couple['B']['follower_count']:
@@ -17,8 +20,10 @@ def has_more_followers(couple):
     else:
         return 'B'
 
+
 def format_entry(entry):
     return f"{entry['name']}, a {entry['description']}, from {entry['country']}."
+
 
 def play_game():
     print_logo()
@@ -28,7 +33,7 @@ def play_game():
     score = 0
 
     couple = {}
-    
+
     couple["A"] = get_random_entry()
     couple["B"] = get_random_entry()
 
@@ -55,5 +60,6 @@ def play_game():
         else:
             print(f"Sorry, that's wrong! Final score: {score}.")
             is_game_over = True
+
 
 play_game()
