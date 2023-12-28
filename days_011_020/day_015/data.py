@@ -2,7 +2,7 @@ menu = {
     "espresso": {
         "ingredients": {
             "water": 50,
-            "coffee": 18,
+            "coffee": 20,
         },
         "cost": 1.5,
     },
@@ -10,7 +10,7 @@ menu = {
         "ingredients": {
             "water": 200,
             "milk": 150,
-            "coffee": 24,
+            "coffee": 30,
         },
         "cost": 2.5,
     },
@@ -18,16 +18,16 @@ menu = {
         "ingredients": {
             "water": 250,
             "milk": 100,
-            "coffee": 24,
+            "coffee": 25,
         },
         "cost": 3.0,
     }
 }
 
 resources = {
-    "water": 0,
-    "milk": 0,
-    "coffee": 0,
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
 }
 
 coins = {

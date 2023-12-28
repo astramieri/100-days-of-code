@@ -4,22 +4,19 @@ import data
 
 
 def select_product():
-    os.system("cls")
-    print(art.logo)
-
     products = "/".join(available_products())
-    product = input(f"What would you like? ({products}): ").lower()
+    choice = input(f"What would you like? ({products}): ").lower()
 
-    if product in data.menu:
-        cost = data.menu[product]["cost"]
-        print(f"You have selected: {product.upper()}. Total cost: ${cost}.")
-    elif product == "off":
+    if choice == "off":
         return None
+    elif choice in data.menu:
+        product = data.menu[choice]
+        print(f"You have selected: {choice.upper()}. Total cost: ${product['cost']}. Ingredients: {product['ingredients']}.")
     else:
         print("Product not found. Please, select a new product.")
-        select_product()
+        return select_product()
 
-    return data.menu[product]
+    return product
 
 
 def insert_coins():
@@ -39,23 +36,11 @@ def insert_coins():
     return round(money, 2)
 
 
-def accept_order(total_money):
-    product = select_product()
-
-    if product == "off":
-        return
+def enough_money(money, product):
+    if money < product["cost"]:
+        return False
     else:
-        money = insert_coins()
-
-        if money < product["cost"]:
-            total_money = 0
-            print("Sorry that's not enough money. Money refund.")
-        else:
-            extra = round(money - product["cost"], 2)
-            total_money += product["cost"]
-            print(f"Here is ${extra} in change.")
-
-    return total_money
+        return True
 
 
 def available_products():
@@ -77,25 +62,49 @@ def available_products():
     return available_products
 
 
-def print_resources():
-    for resource in data.resources:
-        print(f"{resource.capitalize()}: {data.resources[resource]}")
-
-
 def start_machine():
+    stop_machine = False
     total_money = 0
 
-    products = available_products()
+    os.system("cls")
+    print(art.logo)
 
-    if len(available_products()) == 0:
-        print("No enough resources left. Please fill the machine.")
-        print_resources()
+    while not stop_machine:
+        print(f"Total money: {total_money}")
+        print(f"Resources: {data.resources}")
 
-    # while len(available_products()) > 0:
-    #     total_money += accept_order(total_money)
+        products = available_products()
 
-    # print("No enough resources left.")
-    # print_resources()
+        if len(products) == 0:
+            print("No enough resources left. Please fill the machine.")
+            print(f"Resources: {data.resources}")
+            stop_machine = True
+        else:
+            product = select_product()
+
+            if product is None:
+                print("Machine turned off.")
+                stop_machine = True
+            else:
+                money = insert_coins()
+
+                if not enough_money(money, product):
+                    print("Sorry that's not enough money. Money refunded.")
+                else:
+                    total_money += round(product["cost"], 2)
+                    extra = round(money - product["cost"], 2)
+
+                    for key in product["ingredients"]:
+                        data.resources[key] -= product["ingredients"][key]
+
+                    if extra > 0:
+                        print(f"Here is ${extra} dollars in change.")
+
+                    print(f"Here is your beverage. Enjoy!")
+
+        print("")
+
+    print(f"Total money: ${total_money}")
 
 
 start_machine()
