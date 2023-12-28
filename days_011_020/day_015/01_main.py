@@ -3,22 +3,18 @@ import art
 import data
 
 
-# 1. Print resources report
-# 2. Check if resources are sufficient
-# 3. Process coins
-# 4. Check if transaction is successful
-# 5. Make the coffee
-
 def select_product():
     os.system("cls")
     print(art.logo)
 
-    products = "/".join(data.menu.keys())
+    products = "/".join(available_products())
     product = input(f"What would you like? ({products}): ").lower()
 
     if product in data.menu:
         cost = data.menu[product]["cost"]
         print(f"You have selected: {product.upper()}. Total cost: ${cost}.")
+    elif product == "off":
+        return None
     else:
         print("Product not found. Please, select a new product.")
         select_product()
@@ -43,26 +39,63 @@ def insert_coins():
     return round(money, 2)
 
 
-def accept_order():
+def accept_order(total_money):
     product = select_product()
-    money = insert_coins()
-    
-    if money < product["cost"]:
-        total_money = 0
-        print("Sorry that's not enough money. Money refund.")
+
+    if product == "off":
+        return
     else:
-        extra = money - product["cost"]
-        total_money += product["cost"]
-        print(f"Here is ${extra} in change.")
+        money = insert_coins()
+
+        if money < product["cost"]:
+            total_money = 0
+            print("Sorry that's not enough money. Money refund.")
+        else:
+            extra = round(money - product["cost"], 2)
+            total_money += product["cost"]
+            print(f"Here is ${extra} in change.")
+
+    return total_money
+
+
+def available_products():
+    available_products = []
+
+    for product in data.menu:
+        enough_resources = True
+
+        ingredients = data.menu[product]["ingredients"]
+
+        for ingredient in ingredients:
+            if ingredients[ingredient] > data.resources[ingredient]:
+                enough_resources = False
+                break
+
+        if enough_resources:
+            available_products.append(product)
+
+    return available_products
+
+
+def print_resources():
+    for resource in data.resources:
+        print(f"{resource.capitalize()}: {data.resources[resource]}")
 
 
 def start_machine():
     total_money = 0
-    
-    resource_are_enough = False
 
-    while resource_are_enough:
-        accept_order()
-    
-    
+    products = available_products()
+
+    if len(available_products()) == 0:
+        print("No enough resources left. Please fill the machine.")
+        print_resources()
+
+    # while len(available_products()) > 0:
+    #     total_money += accept_order(total_money)
+
+    # print("No enough resources left.")
+    # print_resources()
+
+
 start_machine()
