@@ -2,7 +2,7 @@
 
 ## Summary
 
-- [Days 1 to 10](./days_001_010/days_001_010.md)
+- [Days 01 to 10](./days_001_010/days_001_010.md)
 - [Days 11 to 20](./days_011_020/days_011_020.md)
 
 ## Documentation
