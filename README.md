@@ -12,5 +12,6 @@
 
 ## Resources
 
-- [Reebord's World](https://reeborg.ca/index_en.html) 🤖
+- [Python Package Index (PyPI)](https://pypi.org/)
+- [Reebord's World](https://reeborg.ca/index_en.html)
 
