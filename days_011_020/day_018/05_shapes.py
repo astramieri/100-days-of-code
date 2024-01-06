@@ -14,7 +14,7 @@ for edge in range(3,11):
     g = random.randint(1, 255)
     b = random.randint(1, 255)
 
-    turtle.pencolor(r, g, b)
+    turtle.pencolor((r, g, b))
 
     for _ in range(edge):
         turtle.forward(100)

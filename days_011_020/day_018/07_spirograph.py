@@ -3,24 +3,24 @@ import random
 
 turtle = Turtle()
 turtle.shape("turtle")
-turtle.speed("fast")
-turtle.pensize(10)
+turtle.speed("fastest")
+#turtle.pensize(10)
 
 screen = Screen()
 screen.colormode(255)
 
-for _ in range(100):
-    angle = random.randrange(0, 360, 90)
-
-    print(angle)
-
+for i in range(1, 100):
     r = random.randint(1, 255)
     g = random.randint(1, 255)
     b = random.randint(1, 255)
 
     turtle.pencolor((r, g, b)) # a tuple is immutable
 
-    turtle.forward(30)
-    turtle.setheading(angle)
+    new_heading = random.choice([-1, 1]) * 10
+
+    turtle.setheading(turtle.heading() + new_heading)
+
+    turtle.circle(50)
+    
 
 screen.exitonclick()
