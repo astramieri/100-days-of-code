@@ -24,7 +24,7 @@ def turn_counter_clockwise():
 
 
 def clean_drawing():
-    #turtle.reset()
+    # turtle.reset()
     turtle.clear()
     turtle.penup()
     turtle.home()
