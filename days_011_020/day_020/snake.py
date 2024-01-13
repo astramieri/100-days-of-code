@@ -2,14 +2,16 @@ from turtle import Turtle
 
 DISTANCE = 20
 
-# a turtle has a dimension of 20x20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 class Snake():
-    def __init__(self, tail = 3):
+    def __init__(self, tail=3):
         self.segments = []
         self.create(tail)
-
-
+        self.head = self.segments[0]
 
     def create(self, tail):
         x = 0
@@ -24,11 +26,26 @@ class Snake():
 
             self.segments.append(segment)
 
-    def move(self): 
+    def move(self):
         for i in range(len(self.segments) - 1, 0, -1):
             x = self.segments[i-1].xcor()
             y = self.segments[i-1].ycor()
-            self.segments[i].goto(x,y)
+            self.segments[i].goto(x, y)
 
         self.segments[0].forward(DISTANCE)
-        self.segments[0].right(90)
+
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
+
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
+    
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
+
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
