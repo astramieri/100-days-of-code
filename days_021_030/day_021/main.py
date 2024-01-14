@@ -5,17 +5,22 @@ class Animal():
     def breathe(self):
         print("Inhale, exhale.")
 
+    def move(self):
+        print("Move")
+
+
 class Fish(Animal):
     def __init__(self):
-        super().__init__()
+        super().__init__()  # This is recommended, but not strictly required
 
     def breathe(self):
-        super().breathe()
+        super().breathe() # "Extending"
         print("Underwater")
 
-    def swim(self):
-        print("Moving in water.")
+    def move(self):
+        print("Move in water.") # Override
+
 
 nemo = Fish()
 nemo.breathe()
-nemo.swim()
+nemo.move()
