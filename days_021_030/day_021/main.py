@@ -4,7 +4,7 @@ from food import Food
 from scoreboard import ScoreBoard
 import time
 
-LIMIT = 280
+LIMIT = 290
 
 screen = Screen()
 
@@ -33,6 +33,7 @@ while game_is_on:
     # detect collision with food
     if snake.head.distance(food) < 15:
         food.refresh()
+        snake.extend()
         scoreboard.increase()
 
     # detect collision with wall
