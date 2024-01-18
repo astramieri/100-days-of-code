@@ -6,3 +6,9 @@ for n in numbers[::-1]:
 
 for l in letters[::1]:
     print(f"letter: {l}")
+
+fruits = {}
+
+fruits.add("banana")
+
+print(fruits)
