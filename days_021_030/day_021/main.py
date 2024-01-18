@@ -4,7 +4,7 @@ from food import Food
 from scoreboard import ScoreBoard
 import time
 
-LIMIT = 290
+LIMIT = 280
 
 screen = Screen()
 
@@ -26,12 +26,12 @@ screen.onkey(snake.right, "Right")
 game_is_on = True
 
 while game_is_on:
-    time.sleep(0.1)
     screen.update()
+    time.sleep(0.1)
     snake.move()
 
     # detect collision with food
-    if snake.head.distance(food) < 15:
+    if snake.head.distance(food) < 20:
         food.refresh()
         snake.extend()
         scoreboard.increase()
@@ -40,5 +40,12 @@ while game_is_on:
     if snake.head.xcor() > LIMIT or snake.head.xcor() < -LIMIT or snake.head.ycor() > LIMIT or snake.head.ycor() < -LIMIT:
         game_is_on = False
         scoreboard.game_over()
+
+    # detect collision with tail
+    for segment in snake.segments[1:]:
+        position = (segment.xcor(), segment.ycor())
+        if snake.head.distance(position) < 10:
+            game_is_on = False
+            scoreboard.game_over()
 
 screen.exitonclick()
