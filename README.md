@@ -1,8 +1,8 @@
-# 100 Days Of Code - Python Bootcamp 2023
+# 100 Days Of Code - Python Bootcamp 2024
 
 ## Summary
 
-- [Days 01 to 10](./days_001_010/days_001_010.md)
+- [Days 1 to 10](./days_001_010/days_001_010.md)
 - [Days 11 to 20](./days_011_020/days_011_020.md)
 - [Days 21 to 30](./days_021_030/days_021_030.md)
 
